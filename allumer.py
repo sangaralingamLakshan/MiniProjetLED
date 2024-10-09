@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(130, GPIO.OUT)
+GPIO.setup(0, GPIO.OUT)
 
-GPIO.output(130, GPIO.HIGH)
+GPIO.output(0, GPIO.HIGH)
 print("LED allumée.")
