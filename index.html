@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrôle de la LED RGB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .container {
+            background: #3a3f47;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        h1 {
+            color: #61dafb;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .slider-group {
+            margin: 20px 0;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .button {
+            background-color: #61dafb;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: #282c34;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #51c0e9;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            transition: opacity 0.5s;
+        }
+
+        .status.hidden {
+            opacity: 0;
+        }
+
+        .status.visible {
+            opacity: 1;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9rem;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contrôle de la LED RGB</h1>
+
+        <div class="slider-group">
+            <label for="red">Rouge:</label>
+            <input type="range" id="red" class="slider" min="0" max="255" value="0" oninput="setColor('rouge', this.value)">
+        </div>
+
+        <div class="slider-group">
+            <label for="green">Vert:</label>
+            <input type="range" id="green" class="slider" min="0" max="255" value="0" oninput="setColor('vert', this.value)">
+        </div>
+
+        <div class="slider-group">
+            <label for="blue">Bleu:</label>
+            <input type="range" id="blue" class="slider" min="0" max="255" value="0" oninput="setColor('bleu', this.value)">
+        </div>
+
+        <button class="button" onclick="turnOff()">Éteindre</button>
+
+        <div class="status hidden" id="status"></div>
+    </div>
+
+    <div class="footer">Réalisé par ADEL & LAKSHAN & BILAL</div>
+
+    <script>
+        function setColor(couleur, intensite) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `index.php?action=allumer&couleur=${couleur}&intensite=${intensite}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = xhr.responseText;
+                    const statusElement = document.getElementById("status");
+                    statusElement.innerText = response; 
+                    statusElement.classList.remove('hidden');
+                    statusElement.classList.add('visible');
+                    setTimeout(() => {
+                        statusElement.classList.remove('visible');
+                        statusElement.classList.add('hidden');
+                    }, 2000);
+                }
+            };
+            xhr.send();
+        }
+
+        function turnOff() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `index.php?action=eteindre`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = xhr.responseText;
+                    const statusElement = document.getElementById("status");
+                    statusElement.innerText = response; 
+                    statusElement.classList.remove('hidden');
+                    statusElement.classList.add('visible');
+                    setTimeout(() => {
+                        statusElement.classList.remove('visible');
+                        statusElement.classList.add('hidden');
+                    }, 2000);
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
