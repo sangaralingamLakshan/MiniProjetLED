@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    text-align: center;
+    margin: 0;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+form {
+    display: inline-block;
+    margin: 10px;
+}
+
+.button-container {
+    display: flex; /* Use flexbox to align buttons */
+    justify-content: center; /* Center the buttons */
+    margin: 20px 0; /* Space between button groups */
+}
+
+.button {
+    padding: 15px 25px;
+    font-size: 1em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.green-on {
+    background-color: #4CAF50; /* Vert */
+}
+
+.green-off {
+    background-color: #2e7d32; /* Vert foncé */
+}
+
+.blue-on {
+    background-color: #2196F3; /* Bleu */
+}
+
+.blue-off {
+    background-color: #1976D2; /* Bleu foncé */
+}
+
+.red-on {
+    background-color: #F44336; /* Rouge */
+}
+
+.red-off {
+    background-color: #c62828; /* Rouge foncé */
+}
+
+.button:hover {
+    opacity: 0.8;
+}
